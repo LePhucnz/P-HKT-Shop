@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Bo qua file/thu muc that (vi du anh trong /uploads)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# Chuyen header Authorization vao PHP (mot so cau hinh Apache loc bo)
+RewriteCond %{HTTP:Authorization} ^(.+)$
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
