@@ -1,0 +1,602 @@
+{
+  "info": {
+    "name": "HKT Shop API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url",          "value": "http://localhost/api_HKT/api" },
+    { "key": "token",             "value": "" },
+    { "key": "order_id",          "value": "1" },
+    { "key": "invoice_id",        "value": "1" },
+    { "key": "product_id",        "value": "1" },
+    { "key": "category_id",       "value": "1" },
+    { "key": "customer_id",       "value": "1" },
+    { "key": "purchase_order_id", "value": "1" },
+    { "key": "promotion_id",      "value": "1" },
+    { "key": "user_id",           "value": "1" },
+    { "key": "return_id",         "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "🔐 Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "var json = pm.response.json();",
+            "if (json.success) { pm.collectionVariables.set('token', json.data.token); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@hkt.com\",\n  \"mat_khau\": \"123456\"\n}" },
+            "url": "{{base_url}}/auth/login"
+          }
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"ho_ten\": \"Nguyen Van X\",\n  \"email\": \"nvx@hkt.com\",\n  \"mat_khau\": \"123456\",\n  \"vai_tro\": \"cashier\"\n}" },
+            "url": "{{base_url}}/auth/register"
+          }
+        },
+        {
+          "name": "Me (thong tin ca nhan)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📊 Dashboard",
+      "item": [
+        {
+          "name": "Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/dashboard"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📦 San pham",
+      "item": [
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/products"
+          }
+        },
+        {
+          "name": "List (tim kiem)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{base_url}}/products?search=dien", "query": [{ "key": "search", "value": "dien" }] }
+          }
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"ten_sp\": \"San pham test\",\n  \"danh_muc_id\": 1,\n  \"don_vi_tinh\": \"cai\",\n  \"gia_ban\": 25000,\n  \"so_luong_ton\": 100,\n  \"mo_ta\": \"Mo ta san pham\"\n}" },
+            "url": "{{base_url}}/products"
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/products/{{product_id}}"
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"ten_sp\": \"San pham da sua\",\n  \"gia_ban\": 30000,\n  \"mo_ta\": \"Mo ta moi\"\n}" },
+            "url": "{{base_url}}/products/{{product_id}}"
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/products/{{product_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🏷️ Danh muc",
+      "item": [
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/categories"
+          }
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"ten_danh_muc\": \"Danh muc moi\",\n  \"mo_ta\": \"Mo ta danh muc\"\n}" },
+            "url": "{{base_url}}/categories"
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/categories/{{category_id}}"
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"ten_danh_muc\": \"Danh muc da sua\",\n  \"mo_ta\": \"Mo ta moi\"\n}" },
+            "url": "{{base_url}}/categories/{{category_id}}"
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/categories/{{category_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "👤 Khach hang",
+      "item": [
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/customers"
+          }
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"ho_ten\": \"Nguyen Van A\",\n  \"so_dien_thoai\": \"0901234567\",\n  \"email\": \"nva@gmail.com\",\n  \"dia_chi\": \"Ha Noi\"\n}" },
+            "url": "{{base_url}}/customers"
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/customers/{{customer_id}}"
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"ho_ten\": \"Nguyen Van A (da sua)\",\n  \"so_dien_thoai\": \"0901234567\"\n}" },
+            "url": "{{base_url}}/customers/{{customer_id}}"
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/customers/{{customer_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🛒 Don hang",
+      "item": [
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/orders"
+          }
+        },
+        {
+          "name": "Create (pending)",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "var json = pm.response.json();",
+            "if (json.success && json.data && json.data.id) { pm.collectionVariables.set('order_id', json.data.id); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"khach_hang_id\": null,\n  \"giam_gia\": 0,\n  \"items\": [\n    { \"san_pham_id\": 1, \"so_luong\": 2 }\n  ]\n}" },
+            "url": "{{base_url}}/orders"
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/orders/{{order_id}}"
+          }
+        },
+        {
+          "name": "Update (chi pending)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"khach_hang_id\": 1,\n  \"giam_gia\": 10000,\n  \"items\": [\n    { \"san_pham_id\": 1, \"so_luong\": 3 },\n    { \"san_pham_id\": 2, \"so_luong\": 1 }\n  ]\n}" },
+            "url": "{{base_url}}/orders/{{order_id}}"
+          }
+        },
+        {
+          "name": "Pay → tao hoa don",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"phuong_thuc_tt\": \"Tiền mặt\"\n}" },
+            "url": "{{base_url}}/orders/{{order_id}}/pay"
+          }
+        },
+        {
+          "name": "Cancel",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/orders/{{order_id}}/cancel"
+          }
+        },
+        {
+          "name": "Delete (chi pending/cancelled)",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/orders/{{order_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧾 Hoa don",
+      "item": [
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/invoices"
+          }
+        },
+        {
+          "name": "Create (ban hang truc tiep)",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "var json = pm.response.json();",
+            "if (json.success && json.data && json.data.id) { pm.collectionVariables.set('invoice_id', json.data.id); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"khach_hang_id\": null,\n  \"phuong_thuc_tt\": \"Tiền mặt\",\n  \"giam_gia\": 0,\n  \"items\": [\n    { \"san_pham_id\": 3, \"so_luong\": 2 }\n  ]\n}" },
+            "url": "{{base_url}}/invoices"
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/invoices/{{invoice_id}}"
+          }
+        },
+        {
+          "name": "Delete (chi admin, hoan ton kho)",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/invoices/{{invoice_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🚚 Nhap kho",
+      "item": [
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/purchase-orders"
+          }
+        },
+        {
+          "name": "Create",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "var json = pm.response.json();",
+            "if (json.success && json.data && json.data.id) { pm.collectionVariables.set('purchase_order_id', json.data.id); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"nha_cung_cap\": \"Cong ty ABC\",\n  \"ghi_chu\": \"Nhap hang thang 7\",\n  \"items\": [\n    { \"san_pham_id\": 1, \"so_luong\": 50, \"don_gia_nhap\": 7500000 },\n    { \"san_pham_id\": 2, \"so_luong\": 30, \"don_gia_nhap\": 950000 }\n  ]\n}" },
+            "url": "{{base_url}}/purchase-orders"
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/purchase-orders/{{purchase_order_id}}"
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/purchase-orders/{{purchase_order_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🎁 Khuyen mai",
+      "item": [
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/promotions"
+          }
+        },
+        {
+          "name": "Active (dang hieu luc)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/promotions/active"
+          }
+        },
+        {
+          "name": "Create",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "var json = pm.response.json();",
+            "if (json.success && json.data && json.data.id) { pm.collectionVariables.set('promotion_id', json.data.id); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"ten_km\": \"Giam 15% dip le\",\n  \"mo_ta\": \"Ap dung toan bo don hang\",\n  \"loai_km\": \"percent\",\n  \"gia_tri\": 15,\n  \"ngay_bat_dau\": \"2026-07-01\",\n  \"ngay_ket_thuc\": \"2026-07-31\"\n}" },
+            "url": "{{base_url}}/promotions"
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/promotions/{{promotion_id}}"
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"ten_km\": \"Giam 20% da sua\",\n  \"gia_tri\": 20,\n  \"ngay_ket_thuc\": \"2026-08-31\"\n}" },
+            "url": "{{base_url}}/promotions/{{promotion_id}}"
+          }
+        },
+        {
+          "name": "Toggle (bat/tat)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/promotions/{{promotion_id}}/toggle"
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/promotions/{{promotion_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "↩️ Tra hang",
+      "item": [
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/returns"
+          }
+        },
+        {
+          "name": "Get invoice for return",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/returns/invoice/{{invoice_id}}"
+          }
+        },
+        {
+          "name": "Create",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "var json = pm.response.json();",
+            "if (json.success && json.data && json.data.id) { pm.collectionVariables.set('return_id', json.data.id); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"hoa_don_id\": 1,\n  \"ly_do\": \"San pham bi loi\",\n  \"phuong_thuc_hoan\": \"Tien mat\",\n  \"items\": [\n    { \"chi_tiet_hoa_don_id\": 1, \"so_luong_tra\": 1 }\n  ]\n}" },
+            "url": "{{base_url}}/returns"
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/returns/{{return_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📈 Bao cao",
+      "item": [
+        {
+          "name": "Revenue (doanh thu)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/reports/revenue"
+          }
+        },
+        {
+          "name": "Inventory (ton kho)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/reports/inventory"
+          }
+        }
+      ]
+    },
+    {
+      "name": "👥 Nguoi dung",
+      "item": [
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/users"
+          }
+        },
+        {
+          "name": "Create",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "var json = pm.response.json();",
+            "if (json.success && json.data && json.data.id) { pm.collectionVariables.set('user_id', json.data.id); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"ho_ten\": \"Nhan vien moi\",\n  \"email\": \"nhanvien@hkt.com\",\n  \"mat_khau\": \"123456\",\n  \"vai_tro\": \"cashier\"\n}" },
+            "url": "{{base_url}}/users"
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/users/{{user_id}}"
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"ho_ten\": \"Nhan vien da sua\",\n  \"vai_tro\": \"manager\"\n}" },
+            "url": "{{base_url}}/users/{{user_id}}"
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{base_url}}/users/{{user_id}}"
+          }
+        }
+      ]
+    }
+  ]
+}
