@@ -35,6 +35,10 @@ class CustomerController {
     public function store() {
         Auth::requireLogin();
         $data = Request::validate(['ho_ten', 'so_dien_thoai']);
+        $sdt = trim($data['so_dien_thoai']);
+        if (!preg_match('/^[0-9]{10,11}$/', $sdt)) {
+            Response::error('Số điện thoại phải gồm 10-11 chữ số', 422);
+        }
         $model = new Customer();
         $payload = [
             'ho_ten'        => trim($data['ho_ten']),
@@ -54,6 +58,10 @@ class CustomerController {
         $model = new Customer();
         if (!$model->find($id)) Response::error('Khong tim thay khach hang', 404);
         $data = Request::body();
+        $sdt = trim($data['so_dien_thoai'] ?? '');
+        if ($sdt !== '' && !preg_match('/^[0-9]{10,11}$/', $sdt)) {
+            Response::error('Số điện thoại phải gồm 10-11 chữ số', 422);
+        }
         $payload = [
             'ho_ten'        => trim($data['ho_ten'] ?? ''),
             'so_dien_thoai' => trim($data['so_dien_thoai'] ?? ''),

@@ -135,7 +135,7 @@ route('customers', {
         const form = (k = null) => openModal(k ? 'Sửa khách hàng' : 'Thêm khách hàng', `
             <div class="row g-2">
                 <div class="col-6"><label class="form-label small">Họ tên *</label><input id="k-ten" class="form-control" value="${k ? fmt.esc(k.ho_ten) : ''}"></div>
-                <div class="col-6"><label class="form-label small">SĐT *</label><input id="k-sdt" class="form-control" value="${k ? fmt.esc(k.so_dien_thoai) : ''}"></div>
+                <div class="col-6"><label class="form-label small">SĐT *</label><input id="k-sdt" class="form-control" type="tel" inputmode="numeric" maxlength="11" pattern="[0-9]{10,11}" placeholder="10-11 số" value="${k ? fmt.esc(k.so_dien_thoai) : ''}"></div>
                 <div class="col-6"><label class="form-label small">Email</label><input id="k-email" class="form-control" value="${k ? fmt.esc(k.email || '') : ''}"></div>
                 <div class="col-6"><label class="form-label small">Ngày sinh</label><input id="k-ns" type="date" class="form-control" value="${k && k.ngay_sinh ? k.ngay_sinh : ''}"></div>
                 <div class="col-12"><label class="form-label small">Địa chỉ</label><input id="k-dc" class="form-control" value="${k ? fmt.esc(k.dia_chi || '') : ''}"></div>
@@ -147,11 +147,20 @@ route('customers', {
                     </select></div>
             </div>
         `, { okText: k ? 'Cập nhật' : 'Thêm', onOk: async () => {
-            const data = { ho_ten: val('k-ten'), so_dien_thoai: val('k-sdt'), email: val('k-email'),
+            const sdt = val('k-sdt');
+            if (!/^[0-9]{10,11}$/.test(sdt)) {
+                throw new Error('Số điện thoại phải gồm 10-11 chữ số');
+            }
+            const data = { ho_ten: val('k-ten'), so_dien_thoai: sdt, email: val('k-email'),
                 ngay_sinh: val('k-ns') || null, dia_chi: val('k-dc'), gioi_tinh: val('k-gt') };
             if (k) await api('/customers/' + k.id, { method: 'PUT', body: data });
             else   await api('/customers', { method: 'POST', body: data });
             toast(k ? 'Đã cập nhật' : 'Đã thêm'); load();
+        }, onOpen: () => {
+            const inp = document.getElementById('k-sdt');
+            if (inp) inp.addEventListener('input', () => {
+                inp.value = inp.value.replace(/\D/g, '').slice(0, 11);
+            });
         }});
 
         const rankBadge = r => {
@@ -170,7 +179,7 @@ route('customers', {
                     <button class="btn btn-sm btn-outline-primary" onclick="window._editKh(${k.id})"><i class="bi bi-pencil"></i></button>
                     <button class="btn btn-sm btn-outline-danger" onclick="window._delKh(${k.id})"><i class="bi bi-trash"></i></button>
                 </td></tr>`).join('') || '<tr><td colspan="6" class="text-center text-muted py-3">Chưa có khách hàng</td></tr>';
-            window._editKh = async id => form((await api('/customers/' + id)).data.customer || (await api('/customers/' + id)).data);
+            window._editKh = async id => { const r = await api('/customers/' + id); form(r.data.customer || r.data); };
             window._delKh = async (id) => {
                 if (await confirmAction('Xóa khách hàng #' + id + '?')) {
                     try { await api('/customers/' + id, { method: 'DELETE' }); toast('Đã xóa'); load(); }

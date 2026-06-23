@@ -112,10 +112,10 @@ $routes = [
     ['GET',    'reports/inventory',   'ReportController',        'inventory'],
 
     // Tra hang (returns)
-    ['GET',    'returns',                 'ReturnController',    'index'],
-    ['POST',   'returns',                 'ReturnController',    'store'],
-    ['GET',    'returns/invoice/{id}',    'ReturnController',    'byInvoice'],
-    ['GET',    'returns/{id}',            'ReturnController',    'show'],
+    ['GET',    'returns',                      'ReturnController',    'index'],
+    ['POST',   'returns',                      'ReturnController',    'store'],
+    ['GET',    'returns/invoice/{code}',       'ReturnController',    'byInvoice'],
+    ['GET',    'returns/{id}',                 'ReturnController',    'show'],
 ];
 
 // Trang goc -> thong tin API
@@ -132,7 +132,7 @@ $pathMethodExists = false; // co path khop nhung sai method -> 405
 
 foreach ($routes as [$rMethod, $rPattern, $rController, $rAction]) {
     // Bien pattern thanh regex
-    $regex = '#^' . str_replace('{id}', '([0-9]+)', $rPattern) . '$#';
+    $regex = '#^' . str_replace(['{id}', '{code}'], ['([0-9]+)', '([A-Za-z0-9]+)'], $rPattern) . '$#';
     if (preg_match($regex, $url, $m)) {
         $pathMethodExists = true;
         if ($rMethod === $method) {

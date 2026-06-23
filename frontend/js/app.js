@@ -2,7 +2,6 @@
 
 const ROLE = { ADMIN: 'admin', MANAGER: 'manager', CASHIER: 'cashier', STOCK: 'stock_keeper' };
 
-// Dinh nghia menu sidebar (giong ban MVC)
 const MENU = [
     { section: 'Tổng quan' },
     { route: 'dashboard', icon: 'speedometer2', label: 'Dashboard' },
@@ -18,7 +17,7 @@ const MENU = [
     { route: 'customers', icon: 'people', label: 'Khách hàng' },
     { section: 'Báo cáo', roles: [ROLE.ADMIN, ROLE.MANAGER] },
     { route: 'revenue',   icon: 'bar-chart-line', label: 'Doanh thu', roles: [ROLE.ADMIN, ROLE.MANAGER] },
-    { route: 'inventory', icon: 'clipboard-data', label: 'Tồn kho', roles: [ROLE.ADMIN, ROLE.MANAGER] },
+    { route: 'inventory', icon: 'clipboard-data', label: 'Tồn kho & Bán chạy', roles: [ROLE.ADMIN, ROLE.MANAGER] },
     { route: 'promotions',icon: 'gift', label: 'Khuyến mãi', roles: [ROLE.ADMIN, ROLE.MANAGER] },
     { section: 'Hệ thống', roles: [ROLE.ADMIN] },
     { route: 'users', icon: 'people-fill', label: 'Người dùng', roles: [ROLE.ADMIN] },
@@ -35,7 +34,8 @@ function renderLayout(activeRoute, title) {
     }
 
     document.getElementById('app').innerHTML = `
-    <aside class="sidebar">
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <aside class="sidebar" id="sidebar">
         <a href="#/dashboard" class="sidebar-brand">
             <h6><i class="bi bi-shop me-2 text-primary"></i>HKT Shop</h6>
             <small>${fmt.esc(u.ho_ten || '')}</small>
@@ -46,7 +46,12 @@ function renderLayout(activeRoute, title) {
     </aside>
     <div class="main">
         <div class="topbar">
-            <span class="topbar-title">${fmt.esc(title)}</span>
+            <div class="d-flex align-items-center">
+                <button class="btn-hamburger" id="hamburger-btn" aria-label="Menu">
+                    <i class="bi bi-list"></i>
+                </button>
+                <span class="topbar-title">${fmt.esc(title)}</span>
+            </div>
             <div class="d-flex align-items-center gap-3">
                 <span class="text-muted" style="font-size:.8rem">
                     <i class="bi bi-person-circle me-1"></i>${fmt.esc(u.ho_ten || '')}
@@ -57,13 +62,37 @@ function renderLayout(activeRoute, title) {
         <div class="page-body" id="page-body"><div class="text-center py-5 text-muted"><div class="spinner-border"></div></div></div>
     </div>`;
 
+    // Hamburger logic
+    const hamburger = document.getElementById('hamburger-btn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+
+    function openSidebar() {
+        sidebar.classList.add('open');
+        overlay.classList.add('show');
+    }
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+    }
+
+    hamburger.onclick = () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+    overlay.onclick = closeSidebar;
+
+    // Close sidebar on nav click (mobile)
+    sidebar.querySelectorAll('a[href]').forEach(a => {
+        a.addEventListener('click', () => {
+            if (window.innerWidth <= 768) closeSidebar();
+        });
+    });
+
     document.getElementById('logout-btn').onclick = () => {
         Auth.clear(); location.hash = '#/login';
     };
 }
 
 // ===== ROUTER =====
-const ROUTES = {}; // route -> { title, render(bodyEl, param) }
+const ROUTES = {};
 
 function route(name, def) { ROUTES[name] = def; }
 
@@ -73,10 +102,7 @@ async function handleRoute() {
     const name = parts[0] || 'dashboard';
     const param = parts[1];
 
-    // Trang login
     if (name === 'login') { renderLogin(); return; }
-
-    // Chua dang nhap -> ve login
     if (!Auth.isLoggedIn()) { location.hash = '#/login'; return; }
 
     const def = ROUTES[name] || ROUTES['dashboard'];
