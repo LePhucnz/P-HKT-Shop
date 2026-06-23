@@ -1,0 +1,9 @@
+,OS: Windows 11 | Browser: Chrome 149 | Resolution: 1536x816 | Time: 23 Jun 2026 / 15:30:40  GMT+7
+
+"#","Step","Data","Exp Result","XPath","cssSelector"
+"1","Open website","http://localhost/api_HKT/frontend/#/orders","","",""
+"2","Navigate back","","","",""
+"3","Click on ""Đơn hàng""","","","//a[contains(text(),'Đơn hàng')]",".active"
+"4","Navigate back","","","",""
+"5","Click on ""Tạo đơn hàng""","","","//a[contains(text(),'Tạo đơn hàng')]","body > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > a:nth-child(1)"
+"6","select ""Phạm Quốc Dũng - 0934567890"" from ""Khách lẻ Hoàng Thị Em - 0945678901Phạm Quốc Dũng - 0934567890Lê Thị Cúc - 09""","Phạm Quốc Dũng - 0934567890","","//select[@id='o-kh']","#o-kh"

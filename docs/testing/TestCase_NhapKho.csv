@@ -1,0 +1,17 @@
+,OS: Windows 11 | Browser: Chrome 149 | Resolution: 1536x816 | Time: 23 Jun 2026 / 17:47:12  GMT+7
+
+"#","Step","Data","Exp Result","XPath","cssSelector"
+"1","Open website","http://localhost/api_HKT/frontend/#/purchase","","",""
+"2","Navigate back","","","",""
+"3","Click on ""Nhập kho""","","","//a[contains(text(),'Nhập kho')]","a[href='#/purchase']"
+"4","Navigate back","","","",""
+"5","Click on ""Tạo phiếu nhập""","","","//a[contains(text(),'Tạo phiếu nhập')]","body > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > a:nth-child(1)"
+"6","Click on ""Tên nhà cung cấp""","","","//input[@id='pn-ncc']","#pn-ncc"
+"7","Enter ""Công Ty TT"" into ""Tên nhà cung cấp""","Công Ty TT","","//input[@id='pn-ncc']","#pn-ncc"
+"8","select ""Giày sneaker (tồn: 60)"" from ""Chuột Máy Tính (tồn: 69)San pham test (tồn: 99)San pham test (tồn: 99)Vở kẻ ngang 96 trang (tồn: 297""","Giày sneaker (tồn: 60)","","//select[@id='pn-sp']","#pn-sp"
+"9","Enter ""10"" into ""SL""","10","","//input[@id='pn-qty']","#pn-qty"
+"10","Enter ""500000"" into ""Giá nhập""","500000","","//input[@id='pn-gia']","#pn-gia"
+"11","Click on ""plus icon""","","","//i[@class='bi bi-plus']",".bi.bi-plus"
+"12","Click on ""Lưu phiếu nhập""","","","//button[@id='pn-submit']","#pn-submit"
+"13","Navigate back","","","",""
+"14","Click on ""Nhà cung cấp""","","","//th[contains(text(),'Nhà cung cấp')]","body > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > table:nth-child(1) > thead:nth-child(1) > tr:nth-child(1) > th:nth-child(2)"

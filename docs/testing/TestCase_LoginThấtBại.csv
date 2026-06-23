@@ -1,0 +1,8 @@
+,OS: Windows 11 | Browser: Chrome 149 | Resolution: 1536x816 | Time: 23 Jun 2026 / 15:51:10  GMT+7
+
+"#","Step","Data","Exp Result","XPath","cssSelector"
+"2","Reload","","","0 element matching.",""
+"3","Enter ""admin@xn--dhkt-4na.com"" into ""email@hkt.com""","admin@xn--dhkt-4na.com","","//input[@id='li-email']","#li-email"
+"4","Enter ""******"" into ""••••••""","******","","//input[@id='li-pass']","#li-pass"
+"5","Click on ""Đang đăng nhập...""","","","//button[@id='li-btn']","#li-btn"
+"6","Click on ""Phien dang nhap het han, vui long dang nhap lai""","","","//div[@class='alert alert-danger py-2 small']",".alert.alert-danger.py-2.small"

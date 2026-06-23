@@ -1,0 +1,16 @@
+,OS: Windows 11 | Browser: Chrome 149 | Resolution: 1536x816 | Time: 23 Jun 2026 / 15:15:8  GMT+7
+
+"#","Step","Data","Exp Result","XPath","cssSelector"
+"1","Open website","http://localhost/api_HKT/frontend/#/products","","",""
+"2","Navigate back","","","",""
+"3","Click on ""Sản phẩm""","","","//a[contains(text(),'Sản phẩm')]",".active"
+"4","Click on ""Thêm sản phẩm""","","","//button[@id='add-prod']","#add-prod"
+"5","Click on ""p-ten""","","","//input[@id='p-ten']","#p-ten"
+"6","Enter ""Chuột Máy Tính"" into ""p-ten""","Chuột Máy Tính","","//input[@id='p-ten']","#p-ten"
+"7","select ""Điện tử"" from ""-- Chọn --Điện tửThời trangThực phẩmGia dụngVăn phòng phẩm""","Điện tử","","//select[@id='p-dm']","#p-dm"
+"8","Enter ""50000"" into ""0""","50000","","//input[@id='p-gia']","#p-gia"
+"9","Enter ""50"" into ""0""","50","","//input[@id='p-ton']","#p-ton"
+"10","Click on ""p-mota""","","","//textarea[@id='p-mota']","#p-mota"
+"11","Enter ""Đẹp"" into ""p-mota""","Đẹp","","//textarea[@id='p-mota']","#p-mota"
+"12","Click on ""Thêm""","","","//button[@id='modal-ok']","#modal-ok"
+"13","Click on ""Sản phẩmThêm sản phẩm""","","","//div[@class='d-flex justify-content-between align-items-center mb-3']",".d-flex.justify-content-between.align-items-center.mb-3"

@@ -1,0 +1,5 @@
+,OS: Windows 11 | Browser: Chrome 149 | Resolution: 1536x816 | Time: 23 Jun 2026 / 15:11:52  GMT+7
+
+"#","Step","Data","Exp Result","XPath","cssSelector"
+"2","Click on ""HKT Shop Đăng nhập hệ thống""","","","//div[@class='text-center mb-4']",".text-center.mb-4"
+"3","Click on ""Đang đăng nhập...""","","Giao diện đăng nhập và trang dashboard","//button[@id='li-btn']","#li-btn"
