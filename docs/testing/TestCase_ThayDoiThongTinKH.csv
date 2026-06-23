@@ -1,0 +1,16 @@
+,OS: Windows 11 | Browser: Chrome 149 | Resolution: 1536x816 | Time: 23 Jun 2026 / 17:8:8  GMT+7
+
+"#","Step","Data","Exp Result","XPath","cssSelector"
+"1","Open website","http://localhost/api_HKT/frontend/#/customers","","",""
+"2","Navigate back","","","",""
+"3","Click on ""Khách hàng""","","","//a[normalize-space()='Khách hàng']",".active"
+"4","Click on ""KH00006 Tăng HiHi0325398394 360 Bạc""","","","//tbody/tr[1]/td[6]/button[1]/i[1]","body > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(6) > button:nth-child(1) > i:nth-child(1)"
+"5","Click on ""Họ tên * SĐT * Email Ngày sinh Địa c""","","","//div[@class='row g-2']",".row.g-2"
+"6","Enter ""0325"" into ""10-11 số""","0325","","//input[@id='k-sdt']","#k-sdt"
+"7","Click on ""Địa chỉ""","","","//div[@class='col-12']",".col-12"
+"8","Click on ""k-dc""","","","//input[@id='k-dc']","#k-dc"
+"9","select ""Nam"" from ""-- Nam Nữ""","Nam","","//select[@id='k-gt']","#k-gt"
+"10","Click on ""Họ tên * SĐT * Email Ngày sinh Địa c""","","","//div[@class='row g-2']",".row.g-2"
+"11","Enter ""0325398394"" into ""10-11 số""","0325398394","","//input[@id='k-sdt']","#k-sdt"
+"12","Click on ""Cập nhật""","","","//button[@id='modal-ok']","#modal-ok"
+"13","Click on ""Khách hàngThêm khách hàng ""","","","//div[@id='page-body']","#page-body"

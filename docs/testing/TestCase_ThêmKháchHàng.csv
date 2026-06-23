@@ -1,0 +1,16 @@
+,OS: Windows 11 | Browser: Chrome 149 | Resolution: 1536x816 | Time: 23 Jun 2026 / 15:54:1  GMT+7
+
+"#","Step","Data","Exp Result","XPath","cssSelector"
+"1","Open website","http://localhost/api_HKT/frontend/#/customers","","",""
+"2","Click on ""Thêm khách hàng""","","","//button[@id='add-kh']","#add-kh"
+"3","Click on ""k-ten""","","","//input[@id='k-ten']","#k-ten"
+"4","Enter ""Tăng HiHi"" into ""k-ten""","Tăng HiHi","","//input[@id='k-ten']","#k-ten"
+"5","Click on ""k-sdt""","","","//input[@id='k-sdt']","#k-sdt"
+"6","Enter ""032539395"" into ""k-sdt""","032539395","","//input[@id='k-sdt']","#k-sdt"
+"7","Click on ""k-email""","","","//input[@id='k-email']","#k-email"
+"8","Enter ""Hi@hkt.com"" into ""k-email""","Hi@hkt.com","","//input[@id='k-email']","#k-email"
+"9","Click on ""k-ns""","","","//input[@id='k-ns']","#k-ns"
+"10","Enter ""2005-06-07"" into ""k-ns""","2005-06-07","","//input[@id='k-ns']","#k-ns"
+"11","Click on ""k-dc""","","","//input[@id='k-dc']","#k-dc"
+"12","select ""Nữ"" from ""-- Nam Nữ""","Nữ","","//select[@id='k-gt']","#k-gt"
+"13","Click on ""SĐT""","","","//th[contains(text(),'SĐT')]","body > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > table:nth-child(1) > thead:nth-child(1) > tr:nth-child(1) > th:nth-child(3)"

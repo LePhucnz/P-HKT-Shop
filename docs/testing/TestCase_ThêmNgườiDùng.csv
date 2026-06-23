@@ -1,0 +1,13 @@
+,OS: Windows 11 | Browser: Chrome 149 | Resolution: 1536x816 | Time: 23 Jun 2026 / 15:52:56  GMT+7
+
+"#","Step","Data","Exp Result","XPath","cssSelector"
+"1","Open website","http://localhost/api_HKT/frontend/#/users","","",""
+"2","Navigate back","","","",""
+"3","Click on ""Người dùng""","","","//a[contains(text(),'Người dùng')]",".active"
+"4","Click on ""Thêm người dùng""","","","//button[@id='add-u']","#add-u"
+"5","Click on ""u-ten""","","","//input[@id='u-ten']","#u-ten"
+"6","Enter ""Duy Kiên"" into ""u-ten""","Duy Kiên","","//input[@id='u-ten']","#u-ten"
+"7","Enter ""kien@hkt.com"" into ""u-email""","kien@hkt.com","","//input[@id='u-email']","#u-email"
+"8","Enter ""******"" into ""u-pass""","******","","//input[@id='u-pass']","#u-pass"
+"9","select ""Quản lý"" from ""AdminQuản lýThu ngânThủ kho""","Quản lý","","//select[@id='u-role']","#u-role"
+"10","Click on ""Người dùng Quản trị viên admin""","","","//div[@class='main']",".main"

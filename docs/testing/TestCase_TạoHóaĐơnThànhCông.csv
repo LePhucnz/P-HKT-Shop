@@ -1,0 +1,18 @@
+,OS: Windows 11 | Browser: Chrome 149 | Resolution: 1536x816 | Time: 23 Jun 2026 / 15:31:45  GMT+7
+
+"#","Step","Data","Exp Result","XPath","cssSelector"
+"1","Open website","http://localhost/api_HKT/frontend/#/orders","","",""
+"2","Navigate back","","","",""
+"3","Click on ""Đơn hàng""","","","//a[contains(text(),'Đơn hàng')]",".active"
+"4","Navigate back","","","",""
+"5","Click on ""Tạo đơn hàng""","","","//a[contains(text(),'Tạo đơn hàng')]","body > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > a:nth-child(1)"
+"6","select ""Trần Văn Bình - 0912345678"" from ""Khách lẻ Hoàng Thị Em - 0945678901Phạm Quốc Dũng - 0934567890Lê Thị Cúc - 09""","Trần Văn Bình - 0912345678","","//select[@id='o-kh']","#o-kh"
+"7","Click on ""plus icon""","","","//tbody/tr[4]/td[2]/button[1]/i[1]","body > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2) > button:nth-child(1) > i:nth-child(1)"
+"8","Click on ""+""","","","//button[contains(text(),'+')]","button[onclick='window._cartQty(13,1)']"
+"9","Click on ""Tạo đơn hàng""","","","//button[@id='o-submit']","#o-submit"
+"10","Navigate back","","","",""
+"11","Click on ""Thanh toán""","","","//button[@id='o-pay']","#o-pay"
+"12","select ""Chuyển khoản"" from ""Tiền mặtChuyển khoảnQR CodeThẻ""","Chuyển khoản","","//select[@id='pay-method']","#pay-method"
+"13","Navigate back","","","",""
+"14","Navigate back","","","",""
+"15","Click on ""Quay lại""","","","//a[contains(text(),'Quay lại')]","body > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > a:nth-child(1)"

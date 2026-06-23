@@ -1,0 +1,9 @@
+,OS: Windows 11 | Browser: Chrome 149 | Resolution: 1536x816 | Time: 23 Jun 2026 / 15:48:27  GMT+7
+
+"#","Step","Data","Exp Result","XPath","cssSelector"
+"1","Open website","http://localhost/api_HKT/frontend/#/categories","","",""
+"2","Navigate back","","","",""
+"3","Click on ""Danh mục""","","","//a[contains(text(),'Danh mục')]",".active"
+"4","Click on ""Thêm danh mục""","","","//button[@id='add-cat']","#add-cat"
+"5","Click on ""Thêm""","","","//button[@id='modal-ok']","#modal-ok"
+"6","Click on ""Thêm danh mục Tên danh mục * Mô t""","","","//div[@id='app-modal']","#app-modal"

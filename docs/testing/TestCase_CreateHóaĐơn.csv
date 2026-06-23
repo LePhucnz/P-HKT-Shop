@@ -1,0 +1,17 @@
+,OS: Windows 11 | Browser: Chrome 149 | Resolution: 1536x816 | Time: 23 Jun 2026 / 15:13:36  GMT+7
+
+"#","Step","Data","Exp Result","XPath","cssSelector"
+"1","Open website","http://localhost/api_HKT/frontend/#/invoices","","",""
+"5","Click on ""Đơn hàng""","","","//a[contains(text(),'Đơn hàng')]","a[href='#/orders']"
+"6","Navigate back","","","",""
+"7","Click on ""Tạo đơn hàng""","","","//a[contains(text(),'Tạo đơn hàng')]",".btn.btn-primary.btn-sm"
+"8","select ""Nguyễn Thị Lan - 0901234567"" from ""Khách lẻ Hoàng Thị Em - 0945678901Phạm Quốc Dũng - 0934567890Lê Thị Cúc - 09""","Nguyễn Thị Lan - 0901234567","","//select[@id='o-kh']","#o-kh"
+"9","Click on ""+""","","","//button[normalize-space()='+']","button"
+"10","Click on ""+""","","","//button[normalize-space()='+']","button"
+"11","Click on ""Tạo đơn hàng""","","","//button[@id='o-submit']","#o-submit"
+"12","Navigate back","","","",""
+"13","Click on ""Thanh toán""","","","//button[@id='o-pay']","#o-pay"
+"14","select ""Chuyển khoản"" from ""Tiền mặtChuyển khoảnQR CodeThẻ""","Chuyển khoản","","//select[@id='pay-method']","#pay-method"
+"15","Navigate back","","","",""
+"16","Navigate back","","","",""
+"17","Click on ""Quay lại""","","","//a[contains(text(),'Quay lại')]","body > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > a:nth-child(1)"

@@ -1,0 +1,8 @@
+,OS: Windows 11 | Browser: Chrome 149 | Resolution: 1536x816 | Time: 23 Jun 2026 / 15:50:14  GMT+7
+
+"#","Step","Data","Exp Result","XPath","cssSelector"
+"1","Open website","http://localhost/api_HKT/frontend/#/products","","",""
+"2","Navigate back","","","",""
+"3","Click on ""Sản phẩm""","","","//a[contains(text(),'Sản phẩm')]",".active"
+"4","Click on ""SP001 San pham da sua Điện tử 310.000đ""","","","//tbody/tr[1]/td[6]/button[1]/i[1]","body > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(16) > td:nth-child(6) > button:nth-child(2) > i:nth-child(1)"
+"5","Click on ""Đồng ý""","","","//button[@id='modal-ok']","#modal-ok"

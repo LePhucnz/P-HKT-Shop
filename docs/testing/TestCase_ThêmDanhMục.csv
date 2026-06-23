@@ -1,0 +1,13 @@
+,OS: Windows 11 | Browser: Chrome 149 | Resolution: 1536x816 | Time: 23 Jun 2026 / 15:44:49  GMT+7
+
+"#","Step","Data","Exp Result","XPath","cssSelector"
+"1","Open website","http://localhost/api_HKT/frontend/#/categories","","",""
+"2","Navigate back","","","",""
+"3","Click on ""Danh mục""","","","//a[contains(text(),'Danh mục')]","a[href='#/categories']"
+"4","Click on ""Thêm danh mục""","","","//button[@id='add-cat']","#add-cat"
+"5","Click on ""c-ten""","","","//input[@id='c-ten']","#c-ten"
+"6","Enter ""Rau"" into ""c-ten""","Rau","","//input[@id='c-ten']","#c-ten"
+"7","Click on ""c-mota""","","","//textarea[@id='c-mota']","#c-mota"
+"8","Enter ""Tươi"" into ""c-mota""","Tươi","","//textarea[@id='c-mota']","#c-mota"
+"9","Click on ""Thêm""","","","//button[@id='modal-ok']","#modal-ok"
+"10","Click on ""Danh mụcThêm danh mục TênMô tảSố SP Đi""","","","//div[@id='page-body']","#page-body"
