@@ -1,7 +1,7 @@
 // js/ui.js - modal dung chung (Bootstrap)
 let _modalInstance = null;
 
-function openModal(title, bodyHtml, { okText = 'Lưu', onOk = null, size = '' } = {}) {
+function openModal(title, bodyHtml, { okText = 'Lưu', onOk = null, size = '', onOpen = null } = {}) {
     let el = document.getElementById('app-modal');
     if (!el) {
         el = document.createElement('div');
@@ -31,11 +31,10 @@ function openModal(title, bodyHtml, { okText = 'Lưu', onOk = null, size = '' } 
         catch (e) { toast(e.message || 'Lỗi', 'error'); }
         finally { okBtn.disabled = false; }
     };
+    if (onOpen) el.addEventListener('shown.bs.modal', onOpen, { once: true });
     _modalInstance.show();
 }
 function closeModal() { _modalInstance && _modalInstance.hide(); }
-
-function val(id) { const e = document.getElementById(id); return e ? e.value.trim() : ''; }
 
 async function confirmAction(msg) {
     return new Promise(resolve => {
@@ -51,4 +50,17 @@ async function confirmAction(msg) {
 function pageHeader(title, actionsHtml = '') {
     return `<div class="d-flex justify-content-between align-items-center mb-3">
         <h5 class="fw-bold mb-0">${fmt.esc(title)}</h5><div>${actionsHtml}</div></div>`;
+}
+
+function val(id){
+
+    const el = document.getElementById(id);
+
+    if(!el){
+        console.warn("Không tìm thấy:",id);
+        return "";
+    }
+
+    return el.value.trim();
+
 }

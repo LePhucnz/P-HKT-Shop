@@ -1,6 +1,9 @@
 <?php
 // app/models/Invoice.php
 require_once __DIR__ . '/BaseModel.php';
+require_once __DIR__ . '/InvoiceDetail.php';
+require_once __DIR__ . '/Product.php';
+require_once __DIR__ . '/Customer.php';
 
 class Invoice extends BaseModel {
     protected $table = 'hoa_don';
@@ -76,6 +79,26 @@ class Invoice extends BaseModel {
         }
     }
     
+    // Tìm hóa đơn theo mã so_hd (HD20241001001) hoặc id số
+    public function findBySoHdOrId($value) {
+        if (is_numeric($value)) {
+            return $this->getInvoiceWithDetails((int)$value);
+        }
+        $stmt = $this->db->prepare(
+            "SELECT hd.*, kh.ho_ten as khach_ten, kh.so_dien_thoai, nv.ho_ten as nhan_vien_ten
+             FROM hoa_don hd
+             LEFT JOIN khach_hang kh ON hd.khach_hang_id = kh.id
+             LEFT JOIN users nv ON hd.nhan_vien_id = nv.id
+             WHERE hd.so_hd = :so_hd LIMIT 1"
+        );
+        $stmt->execute(['so_hd' => $value]);
+        $invoice = $stmt->fetch();
+        if ($invoice) {
+            $invoice['details'] = (new InvoiceDetail())->getByInvoiceId($invoice['id']);
+        }
+        return $invoice ?: null;
+    }
+
     // Lấy hóa đơn kèm chi tiết
     public function getInvoiceWithDetails($id) {
         $sql = "SELECT hd.*, kh.ho_ten as khach_ten, kh.so_dien_thoai, nv.ho_ten as nhan_vien_ten

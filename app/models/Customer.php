@@ -43,10 +43,11 @@ class Customer extends BaseModel {
     public function search($keyword) {
         $stmt = $this->db->prepare(
             "SELECT * FROM khach_hang
-             WHERE ho_ten LIKE :kw OR so_dien_thoai LIKE :kw OR ma_kh LIKE :kw
+             WHERE ho_ten LIKE :kw1 OR so_dien_thoai LIKE :kw2 OR ma_kh LIKE :kw3
              ORDER BY id DESC"
         );
-        $stmt->execute(['kw' => "%$keyword%"]);
+        $kw = "%$keyword%";
+        $stmt->execute(['kw1' => $kw, 'kw2' => $kw, 'kw3' => $kw]);
         return $stmt->fetchAll();
     }
 

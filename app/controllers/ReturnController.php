@@ -2,6 +2,9 @@
 require_once __DIR__ . '/../models/ReturnOrder.php';
 require_once __DIR__ . '/../models/ReturnDetail.php';
 require_once __DIR__ . '/../models/Invoice.php';
+require_once __DIR__ . '/../models/InvoiceDetail.php';
+require_once __DIR__ . '/../models/Customer.php';
+require_once __DIR__ . '/../models/Product.php';
 require_once __DIR__ . '/../../core/Response.php';
 require_once __DIR__ . '/../../core/Request.php';
 require_once __DIR__ . '/../../core/Auth.php';
@@ -29,10 +32,10 @@ class ReturnController {
     }
 
     // GET /api/returns/invoice/{invoiceId}
-    // Tra ve hoa don + chi tiet de chon san pham can tra (thay cho form tim hoa don)
+    // Chap nhan ca ID so (5) lan ma hoa don (HD20241001001)
     public function byInvoice($invoiceId) {
         $this->guard();
-        $invoice = (new Invoice())->getInvoiceWithDetails($invoiceId);
+        $invoice = (new Invoice())->findBySoHdOrId($invoiceId);
         if (!$invoice) Response::error('Khong tim thay hoa don', 404);
         Response::success($invoice, 'Hoa don can tra');
     }

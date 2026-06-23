@@ -317,7 +317,7 @@ route('returns', {
         const r = await api('/returns');
         body.innerHTML = pageHeader('Trả hàng', `
             <div class="input-group input-group-sm" style="max-width:280px;display:inline-flex">
-                <input id="rt-invid" class="form-control" placeholder="Nhập ID hóa đơn cần trả...">
+                <input id="rt-invid" class="form-control" placeholder="Nhập mã HĐ (HD...) hoặc ID số...">
                 <button class="btn btn-primary" id="rt-find"><i class="bi bi-search me-1"></i>Tìm</button>
             </div>`) + `
             <div class="table-card"><div class="card-header-custom"><span><i class="bi bi-clock-history me-2"></i>Lịch sử trả hàng</span></div>
@@ -360,7 +360,7 @@ route('returns', {
                 if (!items.length) { toast('Chọn ít nhất 1 sản phẩm', 'error'); return false; }
                 if (!val('rt-lydo')) { toast('Nhập lý do trả', 'error'); return false; }
                 await api('/returns', { method: 'POST', body: {
-                    hoa_don_id: +invId, ly_do: val('rt-lydo'), phuong_thuc_hoan: val('rt-pt'), items
+                    hoa_don_id: inv.id, ly_do: val('rt-lydo'), phuong_thuc_hoan: val('rt-pt'), items
                 }});
                 toast('Đã tạo phiếu trả hàng'); handleRoute();
             }});

@@ -3,3 +3,6 @@
 .env
 .DS_Store
 .staging_src/
+setup_git_real.sh
+*.pdf
+z79645*.jpg
