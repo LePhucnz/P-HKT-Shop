@@ -89,12 +89,6 @@ Dự án tuân theo mô hình Git Flow + Scrum:
 | Sprint 2 | v2.0.0 | Khách hàng, nhập kho, nhà cung cấp, khuyến mãi |
 | Sprint 3 | v3.0.0 | Bán hàng POS, hóa đơn, thanh toán, trả hàng, báo cáo |
 
-## Nhóm thực hiện
 
-| Thành viên | Vai trò |
-|---|---|
-| Trần Đăng Kiên (tdkieen) | Developer |
-| Lê Phúc | Trưởng nhóm / Product Owner |
-| (Thành viên) | Tester |
 
 > Đồ án phục vụ mục đích học tập tại HUTECH.
