@@ -1,0 +1,10 @@
+{
+    "name": "hkt/shop-api",
+    "description": "HKT Shop REST API (pure PHP MVC -> API)",
+    "require": {
+        "firebase/php-jwt": "^6.10"
+    },
+    "autoload": {
+        "psr-4": {}
+    }
+}
